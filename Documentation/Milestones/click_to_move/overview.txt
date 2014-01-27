@@ -1,0 +1,14 @@
+This milestone will set up the most basic functionalityof the game - clicking to a place to send a ship
+
+The player should have a sprite on the screen, and when they click somewhere, register an order with the ship to move to that location.
+
+The ship should maintain a queue of orders to be executed. Currently, the only order available will be "move to".
+
+When a ship is not processing an order, it should check it's order queue.  if it is not empty, it should execute the top order. Once that order is fulfilled, it should be removed from the queue.
+
+Each order will also have zero or more parameters.  The actual behavior caused by an order will be defined in the order's execution. Order Execution will consist of a number of phases, each one containing an action.  Finally, orders will contain a condition, that, when evaluated to true, will indicate that the order is completed, and may be discarded.
+
+The "move to" order will accept a single position parameter (a Vector2D corresponding to a location).  Execution will consist of an alignment phase and a move phase. In the alignment phase, the ship should be rotated about the y(?) axis until it is directed at the point specified in the position parameter.  The rate of rotation will be specified by the roatation rate property of the ship. The move phase will consist of the ship moving at a constant velocity towards the target point until
+it has arrived at the target point.
+
+Issues:
