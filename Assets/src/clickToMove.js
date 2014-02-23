@@ -1,20 +1,34 @@
 ﻿#pragma strict
 
-public var explosion:GameObject;
+public var explosion: GameObject;
 
-function Start () {
-
+// fuction to easily get mouse position in game space coordinates
+function getMouseWorldPosition() : Vector3 {
+	var position = Input.mousePosition;
+	
+	// adjust by camera's z position
+	position.z = Camera.main.transform.localPosition.z * -1;
+	
+	return Camera.main.ScreenToWorldPoint(position);
 }
 
 function Update () {
+	var position: Vector3;
+	var new_explosion: GameObject;
+	
+	// handle right clicks
+	if (Input.GetMouseButtonDown(0)) {
+	}
+	
+	// handle right clicks
 	if (Input.GetMouseButtonDown(1)) {
-		Debug.Log("click");
+		// get position
+		position = getMouseWorldPosition();
+		
 		if (explosion) {
-			Instantiate(explosion);
+			new_explosion = Instantiate(explosion);
+			new_explosion.transform.position = position;
 		}
 	}
 	
-	if (Input.GetMouseButtonDown(0)) {
-		Debug.Log("click1");
-	}
 }
