@@ -41,8 +41,9 @@ function getMouseWorldPosition() : Vector3 {
 
 function Update () {
 	var theta : float;
+	var delta : float = 0;
 	
-	// handle right clicks
+	// handle left clicks
 	if (Input.GetMouseButtonDown(0)) {
 	}
 
@@ -53,12 +54,15 @@ function Update () {
 		this.destination_rotation = angleToDestination(destination);
 		this.rotation_direction = 0;
         //transform.rotation = Quaternion.Euler(0, 0, destination_rotation);
-        this.transform.position = destination;
+        //this.transform.position = destination;
 	}
 	 
 	// move the sprite smoothly
 	theta = destination_rotation - this.transform.rotation.eulerAngles.z;
 	theta = normalizeAngle(theta);
+	
+	delta = (this.destination - transform.position).magnitude;
+
 	if (theta) {
 		// normalize the angle
 		
@@ -86,6 +90,10 @@ function Update () {
 		if (this.rotation_direction == 0) {
 			this.destination_rotation = this.transform.rotation.eulerAngles.z;
 		}
+	}
+	
+	if (delta) {
+		transform.position = Vector3.MoveTowards(transform.position, this.destination, this.movement_speed * Time.deltaTime);
 	} 
 	
 	
