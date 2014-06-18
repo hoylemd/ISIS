@@ -2,6 +2,8 @@
 
 public var rotation_speed : float;
 public var movement_speed : float;
+public var target : GameObject;
+public var ai : String = "";
 
 var destination : Vector3;
 var destination_rotation : float;
@@ -44,12 +46,12 @@ function Update () {
 	var delta : float = 0;
 
 	// handle left clicks
-	if (Input.GetMouseButtonDown(0)) {
+	if (ai && target) {
 
 		// set destination
-		this.destination = getMouseWorldPosition();
-		this.destination_rotation = angleToDestination(destination);
-		this.rotation_direction = 0;
+		this.destination = target.transform.position;
+		//this.destination_rotation = angleToDestination(destination);
+		//this.rotation_direction = 0;
         //transform.rotation = Quaternion.Euler(0, 0, destination_rotation);
         //this.transform.position = destination;
 	}
