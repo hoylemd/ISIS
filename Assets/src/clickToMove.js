@@ -6,6 +6,12 @@ public var movement_speed : float;
 var destination : Vector3;
 var destination_rotation : float;
 var rotation_direction : int;
+var selected : int;
+
+function OnMouseDown () {
+	this.selected = 1;
+	Debug.Log("clicked");
+}
 
 // function to normalize a degrees angle to be between 0 and 360.
 function normalizeAngle(theta : float) : float {
@@ -45,13 +51,19 @@ function Update () {
 
 	// handle left clicks
 	if (Input.GetMouseButtonDown(0)) {
+		this.selected = 1;
+	} 
 
-		// set destination
-		this.destination = getMouseWorldPosition();
-		this.destination_rotation = angleToDestination(destination);
-		this.rotation_direction = 0;
-        //transform.rotation = Quaternion.Euler(0, 0, destination_rotation);
-        //this.transform.position = destination;
+	// handle right clicks
+	if (Input.GetMouseButtonDown(1)) {
+		if (this.selected) {
+			// set destination
+			this.destination = getMouseWorldPosition();
+			this.destination_rotation = angleToDestination(destination);
+			this.rotation_direction = 0;
+	        //transform.rotation = Quaternion.Euler(0, 0, destination_rotation);
+	        //this.transform.position = destination;
+		}
 	}
 
 	// move the sprite smoothly
