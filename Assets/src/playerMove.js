@@ -8,6 +8,8 @@ var destination_rotation : float;
 var rotation_direction : int;
 var selected : int;
 
+var mat : Material;
+
 function OnMouseDown () {
 	this.selected = 1;
 	Debug.Log("clicked");
@@ -45,9 +47,10 @@ function getMouseWorldPosition() : Vector3 {
 	return Camera.main.ScreenToWorldPoint(position);
 }
 
+var delta : float = 0;
 function Update () {
 	var theta : float;
-	var delta : float = 0;
+	delta = 0;
 
 	// handle left clicks
 	if (Input.GetMouseButtonDown(0)) {
@@ -104,6 +107,7 @@ function Update () {
 	if (delta) {
 		transform.position = Vector3.MoveTowards(transform.position, this.destination, this.movement_speed * Time.deltaTime);
 	}
-
-
 }
+
+
+
